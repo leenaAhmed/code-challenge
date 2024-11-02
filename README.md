@@ -29,9 +29,9 @@ even after the outer function has finished execution. This is possible due to th
     When a function is defined inside another function, it retains a reference to its lexical environment, including all variables 
     in the outer scope. This inner function, along with its reference to the surrounding state, is what we call a "closure".
 
---------------------------------------
-    Key Considerations
---------------------------------------
+__
+
+## Key Considerations
 
 1. **Memory Usage**:
         Closures retain the entire lexical environment, including variables and functions, even if they are no longer needed. 
@@ -46,16 +46,14 @@ even after the outer function has finished execution. This is possible due to th
         Closures extend the lifetime of variables referenced within the inner function. Variables can outlive their intended scope, 
         which may lead to bugs if not managed carefully. Always be aware of variable lifetimes in your closures to ensure expected behavior.
 
---------------------------------------
-    Use Cases for Closures
---------------------------------------
+## Use Cases for Closures
 
 1. **Data Encapsulation**:
         Closures enable encapsulating data by providing controlled access through functions and hiding implementation details. 
         This supports building modular and reusable code, which can be particularly useful in larger applications.
 
-        Example:
-        ```javascript
+
+        ```
         function createCounter() {
             let count = 0;
             return function() {
@@ -68,11 +66,11 @@ even after the outer function has finished execution. This is possible due to th
         ```
 
 2. **Function Factories**:
-        Closures allow you to create specialized functions based on a shared template, with each function having its own 
-        private state. This is useful for generating variations of functions with similar behavior.
+        Closures allow you to create specialized functions based on a shared template, with each function having its own private state.
+        This is useful for generating variations of functions with similar behavior.
 
         Example:
-        ```javascript
+        ```
         function multiplier(factor) {
             return function(number) {
                 return number * factor;
@@ -84,9 +82,8 @@ even after the outer function has finished execution. This is possible due to th
         console.log(triple(5)); // 15
         ```
 
-3. **Event Handlers**:
-        Closures are widely used in event-driven programming to preserve the context of an event handler and maintain access 
-        to relevant data.
+4. **Event Handlers**:
+        Closures are widely used in event-driven programming to preserve the context of an event handler and maintain access to relevant data.
 
         Example:
         ```javascript
@@ -105,7 +102,7 @@ Closures are a fundamental concept in JavaScript that allows for
     - *maintaining state across function calls.*
     However, be mindful of memory usage and shared mutable state to avoid bugs and potential memory leaks.
     
---------------------------------------
 
+ ___
 
 
