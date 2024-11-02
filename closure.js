@@ -123,3 +123,56 @@ const composedFunction = compose(increment, square, double);
 const result = composedFunction(10);  
 console.log(result);
 
+
+function outer() {
+    var x = 10;
+  
+    function inner() {
+      console.log(x); // 10
+    }
+  
+    x = 20;
+    return inner; //20
+  }
+  
+  var closureFunc = outer();
+closureFunc(); // 20
+  
+
+
+const obj = {
+    count: 0,
+    increment() {
+      this.count++;
+    },
+  };
+  
+const increments = obj.increment;
+increments();
+console.log(obj.count); //0
+
+
+const obj2 = {
+    count: 0,
+    increment() {
+      this.count++;
+    },
+  };
+  
+const increment2 = obj2.increment.bind(obj2);
+increment2();
+console.log(obj2.count); // 1
+
+
+
+const obj3 = {
+    name: 'Alice',
+    age: 30,
+    sayHello: function() {
+      setTimeout(() => {
+        console.log(`Hello, I'm ${this.name} and I'm ${this.age} years old.`);
+      }, 1000);
+    },
+  };
+  
+obj3.sayHello(); 

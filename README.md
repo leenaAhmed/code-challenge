@@ -57,15 +57,15 @@ __
 
 
         ```
-        function createCounter() {
-            let count = 0;
-            return function() {
-                return ++count;
-            };
-        }
-        const counter = createCounter();
-        console.log(counter()); // 1
-        console.log(counter()); // 2
+            function createCounter() {
+                let count = 0;
+                return function() {
+                    return ++count;
+                };
+            }
+            const counter = createCounter();
+            console.log(counter()); // 1
+            console.log(counter()); // 2
         ```
 
 2. **Function Factories**:
@@ -74,15 +74,15 @@ __
 
         Example:
         ```
-        function multiplier(factor) {
-            return function(number) {
-                return number * factor;
-            };
-        }
-        const double = multiplier(2);
-        const triple = multiplier(3);
-        console.log(double(5)); // 10
-        console.log(triple(5)); // 15
+            function multiplier(factor) {
+                return function(number) {
+                    return number * factor;
+                };
+            }
+            const double = multiplier(2);
+            const triple = multiplier(3);
+            console.log(double(5)); // 10
+            console.log(triple(5)); // 15
         ```
 
 4. **Event Handlers**:
@@ -90,12 +90,14 @@ __
 
         Example:
         ```javascript
-        function setupButton(name) {
-            document.getElementById("myButton").addEventListener("click", function() {
-                alert("Hello, " + name);
-            });
-        }
-        setupButton("Alice"); // "Hello, Alice" when button is clicked
+
+            function setupButton(name) {
+                document.getElementById("myButton").addEventListener("click", function() {
+                    alert("Hello, " + name);
+                });
+            }
+            setupButton("Alice"); // "Hello, Alice" when button is clicked
+            
         ```
 Closures are a fundamental concept in JavaScript that allows for 
       - *encapsulating data*, 
@@ -181,3 +183,63 @@ Closures can cause variables to remain in memory if referenced by an active clos
   funcs[1](); // 1
   funcs[2](); // 2
 ``
+
+
+3. **A Case Where Shared Mutable State Can Cause Issues**
+
+ - The concept of minimizing shared mutable state in the context of closures mainly applies when multiple functions or objects share access to the same variable, particularly when those functions are allowed to modify it.
+
+``` 
+   let sharedCounter = 0;
+
+  function createCounter() {
+      return {
+          increment: function () {
+              sharedCounter++;
+              return sharedCounter;
+          },
+          decrement: function () {
+              sharedCounter--;
+              return sharedCounter;
+          }
+      };
+  }
+
+  const counter1 = createCounter();
+  const counter2 = createCounter();
+
+  console.log(counter1.increment()); // 1
+  console.log(counter2.increment()); // 2 (affects sharedCounter)
+  console.log(counter1.decrement()); // 1 (still affects sharedCounter)
+
+ ```
+
+
+**To solve it**
+ 
+ - One way to avoid this is to make sure each function or object has its own independent state. 
+
+```
+    function createCounter() {
+        let counter = 0;  // Not shared between instances
+
+        return {
+            increment: function () {
+                counter++;
+                return counter;
+            },
+            decrement: function () {
+                counter--;
+                return counter;
+            }
+        };
+    }
+
+    const counter1 = createCounter();
+    console.log(counter1.increment()); // 1
+    console.log(counter1.increment()); // 2
+
+    const counter2 = createCounter();
+    console.log(counter2.decrement()); // -1 (independent from counter1)
+
+```
