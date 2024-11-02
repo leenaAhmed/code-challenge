@@ -17,17 +17,17 @@
 **Lexical Scope Enables Closures:**
  - Lexical scope allows functions to “remember” variables in their outer environment even after the outer function has been completed. This property enables closures, where an inner function retains access to variables from its containing (outer) function.
 
+__
 
---------------------------------------
-    Closures 
---------------------------------------
-
+## Closures 
+ 
 Closures are a powerful feature in JavaScript that allows a function to access variables from its outer (enclosing) function, 
 even after the outer function has finished execution. This is possible due to the static scoping (lexical scoping) mechanism in JavaScript.
 
--- How Closures Work --
-    When a function is defined inside another function, it retains a reference to its lexical environment, including all variables 
-    in the outer scope. This inner function, along with its reference to the surrounding state, is what we call a "closure".
+### How Closures Work :
+
+When a function is defined inside another function, it retains a reference to its lexical environment, including all variables 
+in the outer scope. This inner function, along with its reference to the surrounding state, is what we call a "closure".
 
 __
 
@@ -46,7 +46,8 @@ __
         Closures extend the lifetime of variables referenced within the inner function. Variables can outlive their intended scope, 
         which may lead to bugs if not managed carefully. Always be aware of variable lifetimes in your closures to ensure expected behavior.
 
-## Use Cases for Closures
+## Use Cases for Closures: 
+
 
 1. **Data Encapsulation**:
         Closures enable encapsulating data by providing controlled access through functions and hiding implementation details. 
@@ -103,6 +104,6 @@ Closures are a fundamental concept in JavaScript that allows for
     However, be mindful of memory usage and shared mutable state to avoid bugs and potential memory leaks.
     
 
- ___
+
 
 
