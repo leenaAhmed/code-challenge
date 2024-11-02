@@ -1,20 +1,3 @@
-/*
-  --Closure--
-    To understand closures better, we need to grasp the concept of lexical scope. 
-    Lexical scope means that variables are resolved based on their position in the source code,
-    at the time the code is written, rather than at runtime.
-    This static scoping mechanism allows inner functions to access variables from their enclosing function, creating closures.
-
-
-  --Use Cases for Closures: --
-            Data Encapsulation: Closures enable encapsulating data and providing controlled access through functions. 
-                                This helps in building modular and reusable code.
-            Function Factories: Closures can be used to create specialized functions based on a shared template, 
-                                 with each function having its own private state.
-            Event Handlers: Closures are widely used in event-driven programming to preserve the context of an event handler and maintain access to relevant data.
-*/
-
-
 // Memoization
 /* 
 
@@ -49,20 +32,7 @@ function fibonacci(n) {
 const memoizedFibonacci = memoize(fibonacci(5));
 
 
-/*
-Be mindful of memory usage: 
-                Closures retain the entire lexical environment, including variables and functions,
-                even if they are no longer needed.Be cautious when using closures in long - lived or recursive functions,
-                as they can lead to memory leaks if not managed properly.
 
-Minimize shared mutable state:
-                Closures that share mutable state can introduce unexpected bugs and make your code harder to reason about.
-                Whenever possible, strive for immutability and minimize shared mutable state within closures.
-
-Understand scoping and variable lifetime:
-                Closures can cause variables to live longer than expected if they are referenced by an active closure. 
-                Be aware of variable lifetimes and ensure that your code behaves as intended.
- */
 
 
 
@@ -202,9 +172,9 @@ function logMessage(message) {
   
   const limitedLogMessage = limitCalls(logMessage, 3);
   
-  limitedLogMessage('Hello'); // Output: Hello
-  limitedLogMessage('World'); // Output: World
-  limitedLogMessage('OpenAI'); // Output: OpenAI
+limitedLogMessage('Hello'); // Output: Hello
+limitedLogMessage('World'); // Output: World
+limitedLogMessage('OpenAI'); // Output: OpenAI
 limitedLogMessage('Extra call'); // Output: Maximum number of calls reached!
   
 
@@ -242,3 +212,4 @@ limitedLogMessage('Extra call'); // Output: Maximum number of calls reached!
 const composedFunction = compose(increment, square, double);
 const result = composedFunction(10);  
 console.log(result);
+
