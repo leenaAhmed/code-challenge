@@ -110,7 +110,7 @@ However, be mindful of memory usage and shared mutable state to avoid bugs and p
 
 1. **Closures Retaining the Lexical Environment**
 
-``
+  ```
     function leakyFunction() {
         let largeData = new Array(100).fill("large data for leaky function");
 
@@ -124,11 +124,11 @@ However, be mindful of memory usage and shared mutable state to avoid bugs and p
     }
 
   let func = leakyFunction(); // `largeData` is retained in memory
-``
+  ```
 
 
 **To Solve This**
-`` 
+``` 
   function recursiveFunction(counter , data) {
     if (counter > 0) {
         console.log("solve - " ,data[counter])
@@ -143,12 +143,12 @@ However, be mindful of memory usage and shared mutable state to avoid bugs and p
 
  let func2 = optimizedFunction(); // `largeData` is not retained after function execution
  
-``
+```
 3. **Understanding Scoping and Variable Lifetime**
 
 Closures can cause variables to remain in memory if referenced by an active closure.
 
-``
+```
     function createFunctions() {
       let functions = [];
       for (let i = 0; i < 3; i++) {
@@ -163,11 +163,11 @@ Closures can cause variables to remain in memory if referenced by an active clos
     funcs[0](); // 3
     funcs[1](); // 3
     funcs[2](); // 3
-``
+```
 
 **TO solve it**
- - 
-``
+ 
+```
   function createFunctions() {
     let functions = [];
     for (let i = 0; i < 3; i++) {
@@ -180,4 +180,4 @@ Closures can cause variables to remain in memory if referenced by an active clos
   funcs[0](); // 0
   funcs[1](); // 1
   funcs[2](); // 2
-``
+```
