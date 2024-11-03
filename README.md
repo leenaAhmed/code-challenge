@@ -112,7 +112,7 @@ However, be mindful of memory usage and shared mutable state to avoid bugs and p
 
 1. **Closures Retaining the Lexical Environment**
 
-  ```
+ ```
     function leakyFunction() {
         let largeData = new Array(100).fill("large data for leaky function");
 
@@ -126,7 +126,7 @@ However, be mindful of memory usage and shared mutable state to avoid bugs and p
     }
 
   let func = leakyFunction(); // `largeData` is retained in memory
-  ```
+ ```
 
 
 **To Solve This**
@@ -150,7 +150,7 @@ However, be mindful of memory usage and shared mutable state to avoid bugs and p
 
 Closures can cause variables to remain in memory if referenced by an active closure.
 
-```
+ ```
     function createFunctions() {
       let functions = [];
       for (let i = 0; i < 3; i++) {
@@ -165,11 +165,11 @@ Closures can cause variables to remain in memory if referenced by an active clos
     funcs[0](); // 3
     funcs[1](); // 3
     funcs[2](); // 3
-```
+ ```
 
 **TO solve it**
  
-```
+ ```
   function createFunctions() {
     let functions = [];
     for (let i = 0; i < 3; i++) {
@@ -183,14 +183,14 @@ Closures can cause variables to remain in memory if referenced by an active clos
   funcs[1](); // 1
   funcs[2](); // 2
   
-``
+ ```
 
 
 3. **A Case Where Shared Mutable State Can Cause Issues**
 
  - The concept of minimizing shared mutable state in the context of closures mainly applies when multiple functions or objects share access to the same variable, particularly when those functions are allowed to modify it.
 
-``` 
+ ``` 
    let sharedCounter = 0;
 
   function createCounter() {
@@ -220,7 +220,7 @@ Closures can cause variables to remain in memory if referenced by an active clos
  
  - One way to avoid this is to make sure each function or object has its own independent state. 
 
-```
+ ```
     function createCounter() {
         let counter = 0;  // Not shared between instances
 
@@ -242,5 +242,33 @@ Closures can cause variables to remain in memory if referenced by an active clos
 
     const counter2 = createCounter();
     console.log(counter2.decrement()); // -1 (independent from counter1)
+ ```
+___
 
-```
+## Asynchronous
+ - JavaScript is single-threaded, which means it executes one operation at a time. 
+ - Asynchronous programming allows us to execute tasks concurrently without blocking the main thread, ensuring that our applications remain responsive.
+ - setTimeout and setInterval are built-in JavaScript functions that allow you to delay the execution of code or repeat it at specified intervals.
+
+
+## Promise:
+ - A Promise is a special object in JavaScript that represents the eventual completion or failure of an asynchronous operation, and its resulting value. 
+ - It provides a clean and structured way to handle asynchronous tasks and avoid deeply nested callback structures.  
+
+ **Promise.all() and Promise.race():** 
+  These utility methods allow for aggregating the results of multiple promises or waiting for the first promise to resolve or reject, respectively.
+  This is beneficial when dealing with multiple asynchronous tasks and helps in optimizing performance.
+
+  **Parallel Execution** :
+   - `Promise.all()` takes an array of promises and returns a single promise that fulfills when all of the promises in the array have been fulfilled. If any promise in the array rejects, `Promise.all()` immediately rejects with that reason.
+  - Use `Promise.all()` when you need all promises to complete successfully before continuing with the next operation.
+
+  **First Fulfilled Promise**
+   - `Promise.race()` takes an array of promises but returns a single promise that fulfills or rejects as soon as the first promise in the array settles (fulfills or rejects).
+
+  - Use `Promise.race()` when you are interested in the result of the first promise to settle, regardless of  whether it resolves or rejects.
+  - Useful for cases where you want the first result available and don’t need to wait for the others.
+
+ **First Successful Execution**
+  - `Promise.any()` function that resolves with the result of the first resolved Promise, ignoring any rejections.
+  - This way, we ensure that the chain continues with the result of the first resolved Promise.
