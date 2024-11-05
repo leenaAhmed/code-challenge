@@ -31,7 +31,7 @@ even after the outer function has finished execution. This is possible due to th
 When a function is defined inside another function, it retains a reference to its lexical environment, including all variables 
 in the outer scope. This inner function, along with its reference to the surrounding state, is what we call a "closure".
 
-__
+
 
 ## Key Considerations
 
@@ -72,7 +72,6 @@ __
         Closures allow you to create specialized functions based on a shared template, with each function having its own private state.
         This is useful for generating variations of functions with similar behavior.
 
-        Example:
         ```
             function multiplier(factor) {
                 return function(number) {
@@ -88,9 +87,8 @@ __
 4. **Event Handlers**:
         Closures are widely used in event-driven programming to preserve the context of an event handler and maintain access to relevant data.
 
-        Example:
-        ```javascript
-
+        
+        ```
             function setupButton(name) {
                 document.getElementById("myButton").addEventListener("click", function() {
                     alert("Hello, " + name);
@@ -130,6 +128,7 @@ However, be mindful of memory usage and shared mutable state to avoid bugs and p
 
 
 **To Solve This**
+
 ``` 
   function recursiveFunction(counter , data) {
     if (counter > 0) {
