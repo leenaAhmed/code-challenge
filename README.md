@@ -272,3 +272,74 @@ ___
  **First Successful Execution**
   - `Promise.any()` function that resolves with the result of the first resolved Promise, ignoring any rejections.
   - This way, we ensure that the chain continues with the result of the first resolved Promise.
+
+___
+
+## Concurrency model
+
+  - **The concurrency model** is a design approach in programming and computer science that allows multiple tasks, operations, or processes to be managed and executed "concurrently" (i.e., at the same time or interleaved in time) within a single program.
+  - This model is essential for handling asynchronous operations, multitasking, and efficient resource management, especially in environments where multiple processes need to work together or respond to real-time events, like user interactions, network calls, or input/output operations.
+
+### Key Concepts in the Concurrency Model
+
+  1. **Single-Threaded vs. Multi-Threaded:** 
+   - single-threaded Some environments(like JavaScript in the browser) which means that it can  execute one piece of code at a time.
+   - multi-threaded environments (such as Java or Python with certain configurations) can execute multiple tasks simultaneously by using multiple threads.
+
+  2. **Event Loop:**
+   - Many concurrency models, like JavaScript's, rely on an event loop.
+    The event loop continuously checks if the call stack is empty and then decides which tasks to execute. 
+    This allows single-threaded languages to handle asynchronous operations by queueing tasks and executing them when resources are available.
+ 3. **Task Queues:**
+   - Macrotask Queue: 
+        Stores tasks like setTimeout, setInterval, and event callbacks. 
+        Tasks in the macrotask queue are executed after the current code and microtasks are complete.
+   - Microtask Queue: 
+       Used for high-priority tasks, such as Promise callbacks and process.nextTick in Node.js.
+       Microtasks are processed immediately after synchronous code and before macrotasks.
+
+### Benefits of a Concurrency Model 
+   1. Improved Performance: Reduces blocking and allows other tasks to proceed, leading to faster overall execution.
+
+   2. Better Resource Utilization: Maximizes the use of available resources by handling multiple tasks in an organized way.
+
+   3. Responsive Applications: Helps create smooth, non-blocking applications, such as user interfaces that remain responsive during long-running operations.
+
+## Event Loop Phases
+
+### The call stack
+  - A call stack is a simple data structure that records where in the code we are currently. So if we step into a function that is a function invocation it is pushed to the call stack. When we return from a function it is popped out of the stack.
+  - LIFO => Last in frist out 
+
+### Web APIs:
+  - Web APIs are provided by the browser or the environment in which JavaScript runs. They include features like setTimeout, setInterval, DOM events (click, scroll, etc.), fetch .
+  -Heap: It’s mostly the place where objects are allocated. 
+
+### Callback Queue:
+  - It’s a data structure that stores all the callbacks. Since it’s a queue, the elements are processed based on FIFO which is First in First Out.
+
+### What is the Event Loop?
+ - The event loop is a critical component of JavaScript's runtime environment that enables asynchronous behaviour without blocking the main thread
+
+ - It continuously checks the message queue for pending tasks and processes them one by one, ensuring that your application remains responsive.
+
+ - The event loop simply checks the call stack, and if it is empty (which means there are no functions in the stack) it takes the oldest callback from the callback queue and pushes it into the call stack which eventually executes the callback.
+
+
+### Example: JavaScript Concurrency Model:
+
+```
+   console.log("Start");  //1: start ,  synchronous code
+
+    setTimeout(() => {
+    console.log("Macrotask: setTimeout"); // 4. Macrotask: setTimeout ,run after all synchronous code and microtasks are complete
+    }, 0);
+
+    Promise.resolve().then(() => {
+    console.log("Microtask: Promise");  //3.  Microtask: Promise , processed right after the main code execution.
+    });
+
+    console.log("End"); // 2 : end,  synchronous code
+```
+
+
