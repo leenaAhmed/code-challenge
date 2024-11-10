@@ -341,4 +341,29 @@ ___
     console.log("End"); // 2 : end,  synchronous code
 ```
 
+___
 
+## Iterators
+
+### The Iterator Protocol consists of two essential components:
+
+ 1. Iterable: An object that has an iterator method. This method returns an Iterator object, allowing us to traverse through the collection.
+
+ 2. Iterator: An object that implements the `next()` method. This method returns an object with two properties: `value`, which represents the current element, and `done`, a boolean indicating whether the iteration is complete.
+
+### Dynamic Imports
+ES6 modules also support dynamic imports, allowing you to load modules dynamically at runtime. 
+This can be beneficial for code splitting and lazy-loading in large applications.
+
+```
+  // Dynamic import
+  import('./module.js')
+    .then((module) => {
+      // Use the imported module
+      console.log(module.add(2, 3)); // Output: 5
+    })
+    .catch((error) => {
+      console.error('Error loading module:', error);
+    });
+    
+```
